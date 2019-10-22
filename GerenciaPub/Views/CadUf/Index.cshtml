@@ -1,0 +1,49 @@
+﻿@model List<GerenciaPub.Models.UfModel>
+@{
+    Layout = "~/Views/Shared/_Cad.cshtml";
+    ViewBag.Title = "UF";
+}
+@section styles{
+    <link href="~/Content/Cadastro/Uf.css" rel="stylesheet" />
+}
+
+@section tituloGrid{
+    <th>Nome</th>
+    <th>Ação</th>
+}
+
+@section linhaGrid{
+    @foreach (var item in Model)
+    {
+        <tr data-id="@item.Id">
+            <td>@item.Nome</td>
+            <td>
+                <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+            </td>
+        </tr>
+    }
+}
+
+@section camposCadastro{
+    <div class="row">
+        <div class="form-group">
+            @Html.Label("txt_nome", "Nome", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_nome", null, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        var tituloPagina = '@ViewBag.Title';
+        var urlIncluir = '@Url.Action("RecuperarUf", "CadUf")';
+        var urlExclusao = '@Url.Action("ExcluirUf", "CadUf")';
+        var urlClick = '@Url.Action("SalvarUf", "CadUf")';
+
+    </script>
+
+    <script src="~/Scripts/Cadastro/Uf.js"></script>
+}

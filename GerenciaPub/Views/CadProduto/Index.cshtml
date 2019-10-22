@@ -1,0 +1,118 @@
+﻿@model List<GerenciaPub.Models.ProdutoModel>
+@{
+    Layout = "~/Views/Shared/_Cad.cshtml";
+    ViewBag.Title = "Produto";
+    ViewBag.Lista = Model;
+}
+@section styles{
+    <link href="~/Content/Cadastro/Produto.css" rel="stylesheet" />
+
+}
+
+@section tituloGrid{
+    <th>Código</th>
+    <th>Nome</th>
+    <th>Quantidade</th>
+    <th>Ativo</th>
+    <th>Ação</th>
+}
+
+@section linhaGrid{
+
+    @foreach (var item in Model)
+    {
+        var ativo = (item.Ativo ? "SIM" : "NÃO");
+
+        <tr data-id="@item.Id">
+            <td>@item.Codigo</td>
+            <td>@item.Nome</td>
+            <td>@item.QuantEstoque</td>
+            <td>@ativo</td>
+            <td>
+                <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+            </td>
+        </tr>
+    }
+}
+
+@section camposCadastro{
+
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("txt_codigo", "Código", new { @class = "control-label" })
+            @Html.TextBox("txt_codigo", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-8">
+            @Html.Label("txt_nome", "Nome produto", new { @class = "control-label" })
+            @Html.TextBox("txt_nome", null, new { @class = "form-control", placeholder = "Nome do produto" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("txt_preco_custo", "Preço de Custo", new { @class = "control-label" })
+            @Html.TextBox("txt_preco_custo", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.Label("txt_preco_venda", "Preço de Venda", new { @class = "control-label" })
+            @Html.TextBox("txt_preco_venda", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.Label("txt_quant_estoque", "Quant Estoque", new { @class = "control-label", type = "number" })
+            @Html.TextBox("txt_quant_estoque", null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("txt_unidade_medida", "Unidade de Medida", new { @class = "control-label" })
+            @Html.TextBox("txt_unidade_medida", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-8">
+            @Html.Label("ddl_grupo", "Grupo", new { @class = "control-label" })
+            @Html.DropDownList("ddl_grupo", new SelectList(ViewBag.Grupos, "Id", "Nome"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("ddl_marca", "Marca", new { @class = "control-label" })
+            @Html.DropDownList("ddl_marca", new SelectList(ViewBag.SubGrupo, "Id", "Nome"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-check" style="line-height: 6em; margin-bottom: -2em">
+                @Html.CheckBox("cbx_ativo", new { @class = "form-check-input" })
+                @Html.Label("cbx_ativo", "Ativo", new { @class = "form-check-label" })
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-check" style="line-height: 6em; margin-bottom: -2em">
+                @Html.CheckBox("cbx_ativoadicional", new { @class = "form-check-input" })
+                @Html.Label("cbx_ativoadicional", "Tipo Adicional", new { @class = "form-check-label"})
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-check" style="line-height: 6em; margin-bottom: -2em">
+                @Html.CheckBox("cbx_gera_estoque", new { @class = "form-check-input" })
+                @Html.Label("cbx_gera_estoque", "Gera estoque", new { @class = "form-check-label" })
+            </div>
+        </div>
+
+    </div>
+   
+}
+
+@section scripts{
+    <script>
+        var tituloPagina = '@ViewBag.Title';
+        var url_excluir = '@Url.Action("ExcluirProduto", "CadProduto")';
+        var url_confirmar = '@Url.Action("SalvarProduto", "CadProduto")';
+        var url_alterar = '@Url.Action("RecuperarProduto", "CadProduto")';
+    </script>
+
+    <script src="~/Scripts/Cadastro/Produto.js"></script>
+    <script src="~/Scripts/jquery.validate.custom.pt-br.js"></script>
+}
+
+

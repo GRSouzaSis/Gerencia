@@ -1,0 +1,54 @@
+﻿@model List<GerenciaPub.Models.FuncionarioModel>
+@{
+    Layout = "~/Views/Shared/_Cad.cshtml";
+    ViewBag.Title = "Funcionario";
+    ViewBag.Lista = Model;
+}
+@section styles{
+    <link href="~/Content/Cadastro/Funcionario.css" rel="stylesheet" />
+}
+
+@section tituloGrid{
+    <th>Nome</th>
+    <th>Ação</th>
+}
+
+@section linhaGrid{
+    @foreach (var item in Model)
+    {
+        <tr data-id="@item.Id">
+            <td>@item.Id</td>
+            <td>
+                <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+            </td>
+        </tr>
+    }
+}
+
+@section camposCadastro{
+
+    <div class="row">        
+        <div class="form-group">
+            @Html.Label("txt_funcionario", "Funcionário", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.DropDownList("ddl_funcionario", new SelectList(ViewBag.ListaFuncionario, "Id", "nome"), new { @class = "form-control" })
+            </div>
+        </div>        
+    </div>
+}
+
+@section scripts{
+    <script>
+        var tituloPagina = '@ViewBag.Title';
+       
+        var url_excluir = '@Url.Action("ExcluirFuncionario", "CadFuncionario")';
+        var url_confirmar = '@Url.Action("SalvarFuncionario", "CadFuncionario")';
+        var url_alterar = '@Url.Action("RecuperarFuncionario", "CadFuncionario")';
+    </script>
+
+    <script src="~/Scripts/Cadastro/Funcionario.js"></script>
+
+}
+
+

@@ -1,0 +1,121 @@
+﻿@model List<GerenciaPub.Models.PessoaModel>
+@{
+    Layout = "~/Views/Shared/_Cad.cshtml";
+    ViewBag.Title = "Pessoa";
+    ViewBag.Lista = Model;
+}
+@section styles{
+    <link href="~/Content/Cadastro/Pessoa.css" rel="stylesheet" />
+}
+
+@section tituloGrid{
+    <th>Nome</th>
+    <th>Telefone</th>
+    <th>Celular</th>
+    <th>Ativo</th>
+    <th>Ação</th>
+}
+
+@section linhaGrid{
+    @foreach (var item in Model)
+    {
+        var ativo = (item.Ativo ? "SIM" : "NÃO");
+
+        <tr data-id="@item.Id">
+            <td>@item.Nome</td>
+            <td>@item.Telefone</td>
+            <td>@item.Celular</td>
+            <td>@ativo</td>
+            <td>
+                <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+            </td>
+        </tr>
+    }
+}
+
+@section camposCadastro{
+
+    <div class="row">
+        <div class="form-group">
+            @Html.Label("txt_nome", "Nome", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_nome", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_cpf", "CPF", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_cpf", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_endereco", "Endereço", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_endereco", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_numero", "Numero", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_numero", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_bairro", "Bairro", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_bairro", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_email", "Email", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_email", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_telefone", "Telefone", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_telefone", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_celular", "Celular", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_celular", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_obs", "Observações", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.TextBox("txt_obs", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("txt_cidade", "cidade", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.DropDownList("ddl_cidade", new SelectList(ViewBag.ListaCidade, "Id", "nome"), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("cbx_ativo", "Ativo", new { @class = "col-md-3 control-label" })
+            <div class="col-md-8">
+                @Html.CheckBox("cbx_ativo")
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        var tituloPagina = '@ViewBag.Title';
+        var url_excluir = '@Url.Action("ExcluirPessoa", "CadPessoa")';
+        var url_confirmar = '@Url.Action("SalvarPessoa", "CadPessoa")';
+        var url_alterar = '@Url.Action("RecuperarPessoa", "CadPessoa")';
+    </script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
+    <script src="~/Scripts/Cadastro/Pessoa.js"></script>
+
+}
+
+
