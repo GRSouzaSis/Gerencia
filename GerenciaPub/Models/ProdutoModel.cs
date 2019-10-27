@@ -256,8 +256,9 @@ namespace GerenciaPub.Models
                             "pro_ativo=@ativo," +
                             "gru_id=@gruid," +
                             "sub_id=@subid, " +
-                            "pro_ativoadicional=@ativoadicional,pro_geraestoque@geraestoque " + 
-                            " where pro_id = @id";
+                            "pro_ativoadicional=@ativoadicional," +
+                            "pro_geraestoque=@geraestoque " +
+                            "where pro_id = @id";
                         
                         comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
                         comando.Parameters.Add("@codigo", SqlDbType.VarChar).Value = this.Codigo;
@@ -268,8 +269,7 @@ namespace GerenciaPub.Models
                         comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
                         comando.Parameters.Add("@ativoadicional", SqlDbType.VarChar).Value = (this.AdicionalAtivo ? 1 : 0);
                         comando.Parameters.Add("@gruid", SqlDbType.Int).Value = this.IdGrupo;
-                        comando.Parameters.Add("@subid", SqlDbType.Int).Value = this.IdSubGrupo;
-                        comando.Parameters.Add("@ativoadicional", SqlDbType.VarChar).Value = (this.AdicionalAtivo ? 1 : 0);
+                        comando.Parameters.Add("@subid", SqlDbType.Int).Value = this.IdSubGrupo;                      
                         comando.Parameters.Add("@geraestoque", SqlDbType.VarChar).Value = (this.GeraEstoque ? 1 : 0);
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = this.Id;
 

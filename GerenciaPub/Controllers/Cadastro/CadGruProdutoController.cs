@@ -60,8 +60,10 @@ namespace GerenciaPub.Controllers
                     resultado = "ERRO";
                 }
             }
+            return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo});
+            
 
-            return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
+           
         }
     }
 }

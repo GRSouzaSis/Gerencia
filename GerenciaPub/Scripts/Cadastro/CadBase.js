@@ -38,9 +38,10 @@ function abrir_form(dados) {
 }
 
 function criar_linha_grid(dados) {
+    var str = set_dados_grid(dados);
     var ret =
         '<tr data-id=' + dados.Id + '>' +
-        set_dados_grid(dados) +
+        str +
         '<td>' +
         '<a class="btn btn-primary btn-alterar" role="button" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>' +
         '<a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>' +
@@ -104,9 +105,8 @@ $(document).on('click', '#btn_incluir', function () {
             if (response.Resultado == "OK") {
                 if (param.Id == 0) {
                     param.Id = response.IdSalvo;
-                    var table = $('#grid_cadastro').find('tbody'),
-                        linha = criar_linha_grid(param);
-
+                    var table = $('#grid_cadastro').find('tbody');
+                    var linha = criar_linha_grid(param);
                     table.append(linha);
                 }
                 else {

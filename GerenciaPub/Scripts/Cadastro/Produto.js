@@ -2,8 +2,8 @@
     $('#id_cadastro').val(dados.Id);
     $('#txt_codigo').val(dados.Codigo);
     $('#txt_nome').val(dados.Nome);
-    $('#txt_preco_custo').val(dados.PrecoCusto);
-    $('#txt_preco_venda').val(dados.PrecoVenda);
+    $('#txt_preco_custo').val(dados.PrecoCusto).mask('#.##0,00', { reverse: true });
+    $('#txt_preco_venda').val(dados.PrecoVenda).mask('#.##0,00', { reverse: true });
     $('#txt_quant_estoque').val(dados.QuantEstoque);
     $('#txt_unidade_medida').val(dados.UnidadeMedida);
     $('#ddl_grupo').val(dados.IdGrupo);
@@ -49,7 +49,7 @@ function get_dados_form() {
         IdSubGrupo: $('#ddl_marca').val(),
         Ativo: $('#cbx_ativo').prop('checked'),
         AdicionalAtivo: $('#cbx_ativoadicional').prop('checked'),
-        GeraEstoque: $('cbx_gera_estoque').prop('checked')
+        GeraEstoque: $('#cbx_gera_estoque').prop('checked')
     };
 }
 

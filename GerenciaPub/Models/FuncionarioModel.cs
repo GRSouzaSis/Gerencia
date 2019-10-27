@@ -13,6 +13,8 @@ namespace GerenciaPub.Models
         [Required(ErrorMessage = "Selecione a pessoa")]
         public int IdPessoa { get; set; }
 
+       // public string Nome { get; set; }
+
         public static List<FuncionarioModel> RecuperarLista()
         {
             var ret = new List<FuncionarioModel>();
@@ -25,9 +27,10 @@ namespace GerenciaPub.Models
                 {
                     comando.Connection = conexao;
                     comando.CommandText = "select * from funcionario order by fun_id";
-                    //    "select f.*, p.pes_id from funcionario f, pessoa p where (f.fun_id = @id) and " +
-                    //   "(f.pes_id = p.pes_id) order by f.fun_id";
-                    //  "select c.*, e.id_pais from cidade c, estado e where (c.id = @id) and (c.id_estado = e.id)";
+
+                   // comando.CommandText = "select pes.pes_id, pes.pes_nome,pes.fun_id, u.fun_id " +
+                   //     "from pessoa pes " +
+                   //     "inner join funcionario u on u.fun_id = pes.fun_id";
 
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
@@ -36,6 +39,7 @@ namespace GerenciaPub.Models
                         {
                             Id = (int)reader["fun_id"],
                             IdPessoa = (int)reader["pes_id"]
+                           // Nome = (string)reader["pes_nome"]
                         });
                     }
                 }

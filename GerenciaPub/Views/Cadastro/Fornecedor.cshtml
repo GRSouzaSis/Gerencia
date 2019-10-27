@@ -1,91 +1,356 @@
 ﻿<style>
-    .login-page {
-        width: 360px;
-        padding: 8% 0 0;
-        margin: auto;
+    tbody {
+        font-size: 10px;
     }
 
-    .form {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #principal {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        z-index: 11;
+        background-color: #000;
+        width: 100%;
+        height: 100%;
+    }
+
+    #controle_sistema {
         position: relative;
-        z-index: 1;
-        background: #FFFFFF;
-        max-width: 360px;
-        margin: 0 auto 100px;
-        padding: 45px;
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        top: 0;
+        left: 0;
+        z-index: 11;
+        background-color: #808080;
+        width: 30%;
+        height: 100%;
+        float: left;
     }
 
-        .form input {
-            font-family: "Roboto", sans-serif;
-            outline: 0;
-            background: #f2f2f2;
-            width: 100%;
-            border: 0;
-            margin: 0 0 15px;
-            padding: 15px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
+    #controle_mesas {
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 11;
+        background-color: #4E9BC9;
+        width: 70%;
+        height: 100%;
+        float: right;
+    }
 
-        .form button {
-            font-family: "Roboto", sans-serif;
-            text-transform: uppercase;
-            outline: 0;
-            background: #4CAF50;
-            width: 100%;
-            border: 0;
-            padding: 15px;
-            color: #FFFFFF;
-            font-size: 14px;
-            -webkit-transition: all 0.3 ease;
-            transition: all 0.3 ease;
-            cursor: pointer;
-        }
+    #pedidos {
+        max-height: 200px;
+        overflow-y: auto;
+    }
 
-            .form button:hover, .form button:active, .form button:focus {
-                background: #43A047;
-            }
+    table {
+        border-collapse: collapse;
+        width: 50em;
+        border: 1px solid #666;
+    }
 
-        .form .message {
-            margin: 15px 0 0;
-            color: #b3b3b3;
-            font-size: 12px;
-        }
-            .form .message a {
-                color: #4CAF50;
-                text-decoration: none;
-            }
+    thead {
+        background: #ccc repeat-x left center;
+        border-top: 1px solid #a5a5a5;
+        border-bottom: 1px solid #a5a5a5;
+    }
 
-        .form .register-form {
-            display: none;
-        }
-    body {
-        background: #76b852; /* fallback for old browsers */
-        background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-        background: -moz-linear-gradient(right, #76b852, #8DC26F);
-        background: -o-linear-gradient(right, #76b852, #8DC26F);
-        background: linear-gradient(to left, #76b852, #8DC26F);
-        font-family: "Roboto", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    tr:hover {
+        background-color: #3d80df;
+        color: #fff;
+    }
+
+    thead tr:hover {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    tr:nth-child(even) {
+        background-color: #edf5ff;
+    }
+
+    th {
+        font-weight: normal;
+        text-align: left;
+    }
+
+    th, td {
+        padding: 0.1em 1em;
+    }
+
+    #mesas {
+        overflow-y: auto;
+        border: 1px solid #000000;
+        margin: 2px;
+        padding: 1px 20px 20px 20px;
+        display: table;
+        float: left;
+        border-radius: 15px;
+        background-color: #ffffff;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        background-color: forestgreen;
+    }
+    .botoes {
+        overflow-x: auto;
+        border: 1px solid #000000;
+        margin: 2px;
+        display: table;
+        float: left;
+        background-color: #3d80df;
+        width: 100px;
+        height: 10px;
+        cursor: pointer;
+        text-align: center;
+        vertical-align: middle;        
+    }
+
+    #botoes {
+        width: 100%;
+        margin: 2px;
+    }
+
+    #fechar {
+        background-color: blue;
+    }
+
+    #livre {
+        background-color: green;
+    }
+
+    #uso {
+        background-color: red;
     }
 </style>
+<div class="container" id="principal">
+    <div id="controle_sistema">
+        <div id="config_mesas">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-check">
+                        @Html.RadioButton("rb_mesa", new { @class = "form-check-input" })
+                        @Html.Label("rb_mesa", "Mesa", new { @class = "form-check-label" })
+                    </div>
+                </div>
 
-<div class="login-page">
-    <div class="form">
-        <form class="register-form">
-            <input type="text" placeholder="name" />
-            <input type="password" placeholder="password" />
-            <input type="text" placeholder="email address" />
-            <button>create</button>
-            <p class="message">Already registered? <a href="#">Sign In</a></p>
-        </form>
-        <form class="login-form">
-            <input type="text" placeholder="username" />
-            <input type="password" placeholder="password" />
-            <button>login</button>
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
-        </form>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        @Html.RadioButton("rb_comanda", new { @class = "form-check-input" })
+                        @Html.Label("rb_comanda", "Comanda", new { @class = "form-check-label" })
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-5">
+                    <div class="form-check" style="line-height: 6em;">
+                        @Html.TextBox("txt_mesa", null, new { @class = "form-control", placeholder = "Numero mesa" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div>
+                        <a class="btn btn-success btn-alterar" role="button" onclick="addDiv()"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <div id="numero_mesa">
+            <h4>MESA: </h4>
+        </div>
+        <div id="pedidos">
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="grid_cadastro" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Qtde</th>
+                                <th>Produto</th>
+                                <th>VALOR</th>
+                                <th>Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>SKOL</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>BATATA 500G</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SUCO NATURAL DE LARANJA 300 ML</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SUCO NATURAL DE LARANJA 300 ML</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SUCO NATURAL DE LARANJA 300 ML</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SUCO NATURAL DE LARANJA 300 ML</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>SUCO NATURAL DE LARANJA 300 ML</td>
+                                <td>R$ 10,00</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="total">
+            <br />
+            <p>Total da venda: </p>
+            <p>Pagamento antecipado: </p>
+            <p>Pagamento pendente: </p>
+        </div>
+        <hr />
+        <div class="container col-md-12" onclick="">
+            <div class="botoes">
+                <p>Abrir</p>
+            </div>
+            <div class="botoes">
+                <p>Gravar</p>
+            </div>
+            <div class="botoes">
+                <p>Fechar Conta</p>
+            </div>
+            <div class="botoes">
+                <p>Pagar</p>
+            </div>
+            <div class="botoes">
+                <p>Imprimir</p>
+            </div>
+            <div class="botoes">
+                <p>Transferir</p>
+            </div>
+            <div class="botoes">
+                <p>Reabrir Conta</p>
+            </div>
+            <div class="botoes">
+                <p>Juntar Conta</p>
+            </div>
+            <div class="botoes">
+                <p>Excluir Item</p>
+            </div>
+            <div class="botoes">
+                <p>Cancelar Item</p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-12 text-center">
+            <div>
+                <a class="btn btn-primary btn-abrir"><i class="glyphicon glyphicon-plus"></i> Abrir</a>
+                <a class="btn btn-primary btn-prfechamento" role="button"><i class="glyphicon glyphicon-plus"></i> Pré fechamento</a>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Fechar conta</a>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Enviar impressão</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Transferir</a>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Pagamento Parcial</a>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Reabrir conta</a>
+                <a class="btn btn-primary btn-excluir" role="button"><i class="glyphicon glyphicon-plus"></i> Cancelar conta</a>
+            </div>
+        </div>
+    </div>  -->
+    <!--######################################-->
+
+    <div id="controle_mesas">
+        <label>Usuario: </label>
+        <div id="cabecalho_mesas">
+            <label>Legenda</label>
+            <div class="row text-center">
+                <div class="col-md-2">
+                    <input id="livre" placeholder="Livre">
+                    @Html.TextBox("txt_nome", null, new { @class = "form-control", placeholder = "Nome do produto" })
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input id="uso" placeholder="Em uso">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input id="fechar" placeholder="Pediu a conta">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div onclick="res()" id="mesas">
+            <div class="conteudo_mesa">
+                <p>05</p>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+
+    function res() {
+
+        bootbox.dialog({
+            title: 'Pedidos ',
+            message: 'Vc devia pesquisar mais'
+        });
+
+    }
+    /* function addDiv() {
+         cloneform = $('#controle_mesas').html();
+         $(document).on('click', '.remDiv, .addDiv', function (e) {
+             thisClass = e.target.className;
+             thisClass == 'remDiv' ?
+                 ($('.' + thisClass).length > 1 ?
+                     $(this).closest('.div').prev().add($(this).closest('.div')).remove() : 0) :
+                 $('#controle_mesas').append(cloneform);
+         });
+     }*/
+
+    function addDiv() {
+        // cria um novo elemento div
+        // e dá à ele conteúdo
+
+
+        var divAtual = cloneform = $('#mesas').html();
+        var divNova = document.createElement("div");
+        divNova.setAttribute("id", $('#txt_mesa').val());
+        var conteudoNovo = document.createTextNode($('#txt_mesa').val());
+        divNova.appendChild(conteudoNovo); //adiciona o nó de texto à nova div criada
+        $('#mesas').append(divNova);// adiciona o novo elemento criado e seu conteúdo ao DOM
+    }
+
+
+
+   // font: 100 % /1.6 "Myriad Pro", Frutiger, "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana, sans-serif;
+</script>
