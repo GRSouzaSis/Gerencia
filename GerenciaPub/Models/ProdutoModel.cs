@@ -12,11 +12,11 @@ namespace GerenciaPub.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Preencha o código.")]
-       // [MaxLength(10, ErrorMessage = "O código pode ter no máximo 10 caracteres.")]
+        // [MaxLength(10, ErrorMessage = "O código pode ter no máximo 10 caracteres.")]
         public string Codigo { get; set; }
 
         [Required(ErrorMessage = "Preencha o nome.")]
-      //  [MaxLength(50, ErrorMessage = "O nome pode ter no máximo 50 caracteres.")]
+        //  [MaxLength(50, ErrorMessage = "O nome pode ter no máximo 50 caracteres.")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o preço de custo.")]
@@ -37,7 +37,7 @@ namespace GerenciaPub.Models
         public int QuantEstoque { get; set; }
 
         [Required(ErrorMessage = "Preencha a unidade de medida.")]
-       // [MaxLength(3, ErrorMessage = "O nome pode ter no máximo 3 caracteres.")]
+        // [MaxLength(3, ErrorMessage = "O nome pode ter no máximo 3 caracteres.")]
         public string UnidadeMedida { get; set; }
 
         [Required(ErrorMessage = "Selecione o grupo.")]
@@ -52,7 +52,7 @@ namespace GerenciaPub.Models
 
         public bool GeraEstoque { get; set; }
 
-        public static List<ProdutoModel> RecuperarLista()
+        public static List<ProdutoModel> RecuperarLista(string filtro = "")
         {
             var ret = new List<ProdutoModel>();
 
@@ -62,8 +62,17 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(pro_nome) like '%{0}%'", filtro.ToLower());
+                    }
+
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from produto order by pro_nome";
+                    //comando.CommandText = "select * from produto order by pro_nome";
+                    comando.CommandText = string.Format(
+                        "select * from produto" + filtroWhere + " order by pro_nome");
+
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {
@@ -241,9 +250,9 @@ namespace GerenciaPub.Models
                         comando.Parameters.Add("@subid", SqlDbType.Int).Value = this.IdSubGrupo;
                         comando.Parameters.Add("@ativoadicional", SqlDbType.VarChar).Value = (this.AdicionalAtivo ? 1 : 0);
                         comando.Parameters.Add("@geraestoque", SqlDbType.VarChar).Value = (this.GeraEstoque ? 1 : 0);
-                        
 
-                        ret = (int)comando.ExecuteScalar();                        
+
+                        ret = (int)comando.ExecuteScalar();
                     }
                     else
                     {
@@ -259,7 +268,7 @@ namespace GerenciaPub.Models
                             "pro_ativoadicional=@ativoadicional," +
                             "pro_geraestoque=@geraestoque " +
                             "where pro_id = @id";
-                        
+
                         comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
                         comando.Parameters.Add("@codigo", SqlDbType.VarChar).Value = this.Codigo;
                         comando.Parameters.Add("@valorcusto", SqlDbType.Decimal).Value = this.PrecoCusto;
@@ -269,7 +278,7 @@ namespace GerenciaPub.Models
                         comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
                         comando.Parameters.Add("@ativoadicional", SqlDbType.VarChar).Value = (this.AdicionalAtivo ? 1 : 0);
                         comando.Parameters.Add("@gruid", SqlDbType.Int).Value = this.IdGrupo;
-                        comando.Parameters.Add("@subid", SqlDbType.Int).Value = this.IdSubGrupo;                      
+                        comando.Parameters.Add("@subid", SqlDbType.Int).Value = this.IdSubGrupo;
                         comando.Parameters.Add("@geraestoque", SqlDbType.VarChar).Value = (this.GeraEstoque ? 1 : 0);
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = this.Id;
 

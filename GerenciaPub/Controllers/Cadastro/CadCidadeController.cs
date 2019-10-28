@@ -14,6 +14,14 @@ namespace GerenciaPub.Controllers
             ViewBag.ListaUf = UfModel.RecuperarLista();
             return View(CidadeModel.RecuperarLista());
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult CidadePagina(string filtro)
+        {
+            var lista = CidadeModel.RecuperarLista(filtro);
+
+            return Json(lista);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

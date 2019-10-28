@@ -20,6 +20,14 @@ namespace GerenciaPub.Controllers
         {
             return Json(PessoaModel.RecuperarPeloId(id));
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult PessoaPagina(string filtro)
+        {
+            var lista = PessoaModel.RecuperarLista(filtro);
+
+            return Json(lista);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

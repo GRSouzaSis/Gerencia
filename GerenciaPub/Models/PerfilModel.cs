@@ -15,7 +15,7 @@ namespace GerenciaPub.Models
 
         public bool Ativo { get; set; }
 
-        public static List<PerfilModel> RecuperarLista()
+        public static List<PerfilModel> RecuperarLista(string filtro="")
         {
             var ret = new List<PerfilModel>();
 
@@ -25,8 +25,13 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(per_nome) like '%{0}%'", filtro.ToLower());
+                    }
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from perfil order by per_nome";
+                    comando.CommandText = string.Format("select * from perfil" + filtroWhere + " order by per_nome");
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {

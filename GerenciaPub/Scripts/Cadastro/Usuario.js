@@ -10,9 +10,10 @@ function set_focus_form() {
 }
 
 function set_dados_grid(dados) {
-    return
-    '<td>' + dados.Nome + '</td>' +
+    var str ='<td>' + dados.Nome + '</td>' +
         '<td>' + dados.Login + '</td>';
+    return str;
+    
 }
 
 function get_dados_inclusao() {

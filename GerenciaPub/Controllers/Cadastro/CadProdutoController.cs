@@ -15,7 +15,16 @@ namespace GerenciaPub.Controllers.Cadastro
             ViewBag.SubGrupo = SubGrupoProdutoModel.RecuperarListaAtivos();
 
             return View(ProdutoModel.RecuperarLista());
-        }         
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ProdutoPagina(string filtro)
+        {
+            var lista = ProdutoModel.RecuperarLista(filtro);
+
+            return Json(lista);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

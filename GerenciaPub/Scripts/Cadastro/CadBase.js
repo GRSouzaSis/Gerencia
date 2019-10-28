@@ -129,3 +129,29 @@ $(document).on('click', '#btn_incluir', function () {
             }
         });
     })
+
+    .on('keyup', '#txt_filtro', function () {
+        var filtro = $(this),
+            url = url_filtro,
+            param = { 'filtro': filtro.val() }
+
+        $.post(url, add_anti_forgery_token(param), function (response) {
+            if (response) {
+                var table = $('#grid_cadastro').find('tbody');
+
+                table.empty();
+                if (response.length > 0) {
+                    $('#grid_cadastro').removeClass('invisivel');
+                    $('#mensagem_grid').addClass('invisivel');
+
+                    for (var i = 0; i < response.length; i++) {
+                        table.append(criar_linha_grid(response[i]));
+                    }
+                }
+                else {
+                    $('#grid_cadastro').addClass('invisivel');
+                    $('#mensagem_grid').removeClass('invisivel');
+                }
+            }
+        });
+    });

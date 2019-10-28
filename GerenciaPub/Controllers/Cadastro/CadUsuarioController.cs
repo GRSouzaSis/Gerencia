@@ -18,7 +18,14 @@ namespace GerenciaPub.Controllers
             ViewBag.SenhaPadrao = _senhaPadrao;
             return View(UsuarioModel.RecuperarLista());
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UsuarioPagina(string filtro)
+        {
+            var lista = UsuarioModel.RecuperarLista(filtro);
 
+            return Json(lista);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RecuperarUsuario(int id)

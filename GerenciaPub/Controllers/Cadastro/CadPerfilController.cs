@@ -17,6 +17,15 @@ namespace GerenciaPub.Controllers.Cadastro
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public JsonResult PerfilPagina(string filtro)
+        {
+            var lista = PerfilModel.RecuperarLista(filtro);
+
+            return Json(lista);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult RecuperarPerfil(int id)
         {
             return Json(PerfilModel.RecuperarPeloId(id));

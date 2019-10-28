@@ -161,6 +161,7 @@
     <Compile Include="Controllers\GraficoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperacaoController.cs" />
+    <Compile Include="Controllers\Operacao\OperEntradaProdutoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -250,7 +251,6 @@
     <Content Include="Views\Cadastro\UnidadeMedida.cshtml" />
     <Content Include="Views\Grafico\PerdaMes.cshtml" />
     <Content Include="Views\Grafico\EntradaSaida.cshtml" />
-    <Content Include="Views\Operacao\EntradaProduto.cshtml" />
     <Content Include="Views\Operacao\SaidaProduto.cshtml" />
     <Content Include="Views\Operacao\PerdaProduto.cshtml" />
     <Content Include="Views\Relatorio\Ressuprimento.cshtml" />
@@ -263,6 +263,7 @@
     <Content Include="Views\CadPessoa\Index.cshtml" />
     <Content Include="Views\CadFuncionario\Index.cshtml" />
     <Content Include="Views\CadProduto\Index.cshtml" />
+    <Content Include="Views\OperEntradaProduto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

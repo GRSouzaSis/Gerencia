@@ -2,8 +2,8 @@
     $('#id_cadastro').val(dados.Id);
     $('#txt_codigo').val(dados.Codigo);
     $('#txt_nome').val(dados.Nome);
-    $('#txt_preco_custo').val(dados.PrecoCusto).mask('#.##0,00', { reverse: true });
-    $('#txt_preco_venda').val(dados.PrecoVenda).mask('#.##0,00', { reverse: true });
+    $('#txt_preco_custo').val(dados.PrecoCusto);
+    $('#txt_preco_venda').val(dados.PrecoVenda);
     $('#txt_quant_estoque').val(dados.QuantEstoque);
     $('#txt_unidade_medida').val(dados.UnidadeMedida);
     $('#ddl_grupo').val(dados.IdGrupo);
@@ -17,6 +17,15 @@ function set_focus_form() {
     var alterando = (parseInt($('#id_cadastro').val()) > 0);
     $('#txt_quant_estoque').attr('readonly', alterando);   
     $('#txt_codigo').focus();
+}
+
+function set_dados_grid(dados) {
+    var str = '<td>' + dados.Codigo + '</td>' +
+        '<td>' + dados.Nome + '</td>' +
+        '<td>' + dados.QuantEstoque + '</td>' +
+        '<td>' + (dados.Ativo ? 'SIM' : 'NÃO') + '</td>';
+    return str;
+
 }
 
 function get_dados_inclusao() {

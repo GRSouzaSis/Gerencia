@@ -54,7 +54,7 @@ namespace GerenciaPub.Models
             return ret;
         }
 
-        public static List<UsuarioModel> RecuperarLista()
+        public static List<UsuarioModel> RecuperarLista(string filtro="")
         {
             var ret = new List<UsuarioModel>();
 
@@ -64,8 +64,14 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(usu_nome) like '%{0}%'", filtro.ToLower());
+                    }
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from usuario order by usu_nome";
+                    comando.CommandText = string.Format(
+                      "select * from usuario" + filtroWhere + " order by usu_nome");
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {

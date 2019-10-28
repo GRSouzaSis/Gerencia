@@ -18,7 +18,7 @@ namespace GerenciaPub.Models
 
         public bool Ativo { get; set; }
 
-        public static List<SubGrupoProdutoModel> RecuperarLista()
+        public static List<SubGrupoProdutoModel> RecuperarLista(string filtro="")
         {
             var ret = new List<SubGrupoProdutoModel>();
 
@@ -28,8 +28,15 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(sub_descricao) like '%{0}%'", filtro.ToLower());
+                    }
+
                     comando.Connection = conexao;
-                    comando.CommandText = "select * from subgrupo order by sub_descricao";
+                    comando.CommandText = string.Format(
+                       "select * from subgrupo" + filtroWhere + " order by sub_descricao");
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {

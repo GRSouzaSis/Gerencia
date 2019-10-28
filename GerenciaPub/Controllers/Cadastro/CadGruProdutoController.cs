@@ -16,6 +16,15 @@ namespace GerenciaPub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public JsonResult GrupoProdutoPagina(string filtro)
+        {
+            var lista = GrupoProdutoModel.RecuperarLista(filtro);
+
+            return Json(lista);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RecuperarGrupoProduto(int id)
         {
             return Json(GrupoProdutoModel.RecuperarPeloId(id));

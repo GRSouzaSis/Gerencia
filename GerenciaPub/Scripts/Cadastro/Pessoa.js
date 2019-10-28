@@ -17,11 +17,12 @@ function set_focus_form() {
 }
 
 function set_dados_grid(dados) {
-    return
-    '<td>' + dados.Nome + '</td>',
-        '<td>' + dados.Telefone + '</td>',
-        '<td>' + dados.Celular + '</td>',
+    var str =  '<td>' + dados.Nome + '</td>'+
+        '<td>' + dados.Telefone + '</td>'+
+        '<td>' + dados.Celular + '</td>'+
         '<td>' + (dados.Ativo ? 'SIM' : 'NÃO') + '</td>';
+    return str;
+   
 }
 
 

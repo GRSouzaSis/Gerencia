@@ -19,7 +19,7 @@ namespace GerenciaPub.Models
 
         public string Uf { get; set; }
 
-        public static List<CidadeModel> RecuperarLista()
+        public static List<CidadeModel> RecuperarLista(string filtro="")
         {
             var ret = new List<CidadeModel>();
 
@@ -29,13 +29,23 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(cid_nome) like '%{0}%'", filtro.ToLower());
+                    }
                     comando.Connection = conexao;
                      //comando.CommandText = "select * from cidade order by cid_nome";
-                     comando.CommandText = "select cid.cid_id, cid.cid_nome,cid.uf_id, u.uf_nome " +
-                        "from cidade cid " +
-                        "inner join uf u on u.uf_id = cid.uf_id";
-                 
-                     var reader = comando.ExecuteReader();
+
+                    // comando.CommandText = "select cid.cid_id, cid.cid_nome,cid.uf_id, u.uf_nome " +
+                    //    "from cidade cid " +
+                    //    "inner join uf u on u.uf_id = cid.uf_id";
+
+                    comando.CommandText = string.Format("select cid.cid_id, cid.cid_nome,cid.uf_id, u.uf_nome " +
+                        "from cidade cid "+ 
+                        "inner join uf u on u.uf_id = cid.uf_id"+ filtroWhere);
+
+                    var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {
                         ret.Add(new CidadeModel

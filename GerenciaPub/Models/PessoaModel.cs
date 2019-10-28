@@ -52,7 +52,7 @@ namespace GerenciaPub.Models
 
 
 
-        public static List<PessoaModel> RecuperarLista()
+        public static List<PessoaModel> RecuperarLista(string filtro="")
         {
             var ret = new List<PessoaModel>();
 
@@ -62,8 +62,14 @@ namespace GerenciaPub.Models
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
-                    comando.Connection = conexao;
-                    comando.CommandText = "select * from pessoa order by pes_nome";
+                    var filtroWhere = "";
+                    if (!string.IsNullOrEmpty(filtro))
+                    {
+                        filtroWhere = string.Format(" where lower(pes_nome) like '%{0}%'", filtro.ToLower());
+                    }
+
+                    comando.Connection = conexao;                    
+                    comando.CommandText = string.Format("select * from pessoa"+ filtroWhere + " order by pes_nome");
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {
