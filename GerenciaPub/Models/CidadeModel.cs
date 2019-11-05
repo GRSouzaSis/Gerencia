@@ -32,7 +32,7 @@ namespace GerenciaPub.Models
                     var filtroWhere = "";
                     if (!string.IsNullOrEmpty(filtro))
                     {
-                        filtroWhere = string.Format(" where lower(cid_nome) like '%{0}%'", filtro.ToLower());
+                        filtroWhere = string.Format(" where lower(cid.cid_nome) like '%{0}%'", filtro.ToLower());
                     }
                     comando.Connection = conexao;
                      //comando.CommandText = "select * from cidade order by cid_nome";

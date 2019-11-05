@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace GerenciaPub.Models
 {
@@ -20,15 +21,15 @@ namespace GerenciaPub.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o preço de custo.")]
-        [Range(0.01, 99999.99,
+        [Range(0 , 99999.99 ,
              ErrorMessage = "O Preço de Custo deve estar entre " +
                             "0,01 e 99999,99.")]
         [DisplayName("Preço de Custo")]
         public decimal? PrecoCusto { get; set; }
 
         [Required(ErrorMessage = "Preencha o preço de venda.")]
-        [Range(0.01, 99999.99,
-             ErrorMessage = "O Preço de Venda deve estar entre " +
+        [Range(0, 99999.99,
+             ErrorMessage = "O Preço de Custo deve estar entre " +
                             "0,01 e 99999,99.")]
         [DisplayName("Preço de Venda")]
         public decimal? PrecoVenda { get; set; }
@@ -51,6 +52,7 @@ namespace GerenciaPub.Models
         public bool AdicionalAtivo { get; set; }
 
         public bool GeraEstoque { get; set; }
+    
 
         public static List<ProdutoModel> RecuperarLista(string filtro = "")
         {
@@ -293,4 +295,5 @@ namespace GerenciaPub.Models
             return ret;
         }
     }
+   
 }

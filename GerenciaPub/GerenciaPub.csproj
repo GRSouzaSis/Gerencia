@@ -161,6 +161,7 @@
     <Compile Include="Controllers\GraficoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperacaoController.cs" />
+    <Compile Include="Controllers\Operacao\MovimentoMesaController.cs" />
     <Compile Include="Controllers\Operacao\OperEntradaProdutoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +180,7 @@
     <Compile Include="Models\SubGrupoProdutoModel.cs" />
     <Compile Include="Models\UfModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
+    <Compile Include="Models\ViewMesaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +197,7 @@
     <Content Include="Content\Cadastro\SubGrupoProduto.css" />
     <Content Include="Content\Cadastro\Uf.css" />
     <Content Include="Content\Cadastro\Usuario.css" />
+    <Content Include="Content\Operacoes\MesasMovimento.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -229,6 +232,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Operacao\OperacaoMesas.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -264,6 +268,7 @@
     <Content Include="Views\CadFuncionario\Index.cshtml" />
     <Content Include="Views\CadProduto\Index.cshtml" />
     <Content Include="Views\OperEntradaProduto\Index.cshtml" />
+    <Content Include="Views\MovimentoMesa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

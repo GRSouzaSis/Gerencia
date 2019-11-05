@@ -1,0 +1,88 @@
+﻿@model List<GerenciaPub.Models.ViewMesaModel>
+@{
+    var lista = ViewBag.Lista;
+    var titulo = ViewBag.Title;
+    ViewBag.Title = "Cadastro de " + ViewBag.Title;
+    ViewBag.Title = "Mesas";
+    ViewBag.lista = Model;
+}
+
+<link href="~/Content/Operacoes/MesasMovimento.css" rel="stylesheet" />
+
+
+
+<div class="container" id="principal">
+    <div id="controle_sistema">
+        <div id="config_mesas">
+            <div class="row">
+                <h3>@ViewBag.Title</h3>
+            </div>
+            <hr />
+            <div id="msg_mensagem_aviso" class="text-danger invisivel"></div>
+            <fieldset>
+                @Html.AntiForgeryToken()
+                <div class="row col-md-12">
+                    <section>
+                        <div class="col-md-5">
+                            <div class="form-check">
+                                @Html.TextBox("txt_mesa", null, new { @class = "form-control", placeholder = "Numero Mesa/Comanda" })
+                            </div>
+                            <br />
+                        </div>
+                    </section>
+
+                    <div class="col-md-2">
+                        <div>
+                            <a id="btn_incluir" class="btn btn-success" role="button">
+                                <i class="glyphicon glyphicon-plus"></i>Abrir mesa
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            @Html.TextBox("txt_filtro", null, new { @class = "form-control", placeholder = "Filtrar Mesas" })
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <br />
+
+
+    <div id="controle_mesas" class="container">
+
+        @foreach (var item in Model)
+        {
+            <div data-id="@item.MesaId" onclick="res()" class="mesas">
+                <div class="conteudo_mesa">
+                    <p>@item.MesaNome</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<div id="eventos" class="btn-group invisivel" role="group" aria-label="Exemplo básico">
+    <button type="button" class="btn btn-primary">Abrir mesa</button>
+    <button type="button" class="btn btn-success">Pedidos</button>
+    <button type="button" class="btn btn-warning">Trocar mesa</button>
+    <button type="button" class="btn btn-danger">Fechar mesa</button>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        var url_confirmar = '@Url.Action("SalvarMesa", "MovimentoMesa")';
+        var url_filtro = '@Url.Action("MesaPagina", "MovimentoMesa")';
+    </script>
+    <script src="~/Scripts/Operacao/OperacaoMesas.js"></script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
+
+}
+

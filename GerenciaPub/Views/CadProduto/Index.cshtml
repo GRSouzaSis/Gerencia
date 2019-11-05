@@ -51,21 +51,21 @@
     <div class="row">
         <div class="col-md-4">
             @Html.Label("txt_preco_custo", "Preço de Custo", new { @class = "control-label" })
-            @Html.TextBox("txt_preco_custo", null, new { @class = "form-control" })
+            @Html.TextBox("txt_preco_custo", null, new { @class = "form-control", placeholder = "Valor de custo"})
         </div>
         <div class="col-md-4">
             @Html.Label("txt_preco_venda", "Preço de Venda", new { @class = "control-label" })
-            @Html.TextBox("txt_preco_venda", null, new { @class = "form-control" })
+            @Html.TextBox("txt_preco_venda", null, new { @class = "form-control", placeholder = "Valor de venda" })
         </div>
         <div class="col-md-4">
-            @Html.Label("txt_quant_estoque", "Quant Estoque", new { @class = "control-label", type = "number" })
-            @Html.TextBox("txt_quant_estoque", null, new { @class = "form-control" })
+            @Html.Label("txt_quant_estoque", "Quantidade Estoque", new { @class = "control-label" })
+            @Html.TextBox("txt_quant_estoque", null, new { @class = "form-control", placeholder = "Qtde inicial" })
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             @Html.Label("txt_unidade_medida", "Unidade de Medida", new { @class = "control-label" })
-            @Html.TextBox("txt_unidade_medida", null, new { @class = "form-control" })
+            @Html.TextBox("txt_unidade_medida", null, new { @class = "form-control", placeholder = "L/ml/kg/g" })
         </div>
         <div class="col-md-8">
             @Html.Label("ddl_grupo", "Grupo", new { @class = "control-label" })
@@ -89,7 +89,7 @@
         <div class="col-md-3">
             <div class="form-check" style="line-height: 6em; margin-bottom: -2em">
                 @Html.CheckBox("cbx_ativoadicional", new { @class = "form-check-input" })
-                @Html.Label("cbx_ativoadicional", "Tipo Adicional", new { @class = "form-check-label"})
+                @Html.Label("cbx_ativoadicional", "Tipo Adicional", new { @class = "form-check-label" })
             </div>
         </div>
         <div class="col-md-4">
@@ -100,10 +100,11 @@
         </div>
 
     </div>
-   
+
 }
 
 @section scripts{
+
     <script>
         var tituloPagina = '@ViewBag.Title';
         var url_excluir = '@Url.Action("ExcluirProduto", "CadProduto")';
@@ -113,6 +114,7 @@
     </script>
 
     <script src="~/Scripts/Cadastro/Produto.js"></script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
 }
 
 

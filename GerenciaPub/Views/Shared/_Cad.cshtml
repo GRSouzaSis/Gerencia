@@ -20,7 +20,7 @@
                 <a id="btn_incluir" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus"></i> Incluir</a>
             </div>
             <div class="col-md-6">
-                @Html.TextBox("txt_filtro", null, new { @class = "form-control", placeholder = "Pesquisa" })
+                @Html.TextBox("txt_filtro", null, new { @class = "form-control", placeholder = "Filtrar" })
             </div>
         </div>
         <div class="row">
@@ -65,6 +65,7 @@
     </fieldset>
 </div>
 @section Scripts{
+<script src="~/Scripts/jquery.mask.min.js"></script>
     <script src="~/Scripts/Cadastro/CadBase.js"></script>   
     @RenderSection("scripts", true)
 }

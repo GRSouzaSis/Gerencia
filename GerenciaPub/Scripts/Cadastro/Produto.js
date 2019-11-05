@@ -15,7 +15,8 @@
 
 function set_focus_form() {
     var alterando = (parseInt($('#id_cadastro').val()) > 0);
-    $('#txt_quant_estoque').attr('readonly', alterando);   
+    $('#txt_preco_custo,#txt_preco_venda').mask('#.##0,00', { reverse: true });
+    $('#txt_quant_estoque').attr('readonly', alterando); 
     $('#txt_codigo').focus();
 }
 
@@ -25,7 +26,6 @@ function set_dados_grid(dados) {
         '<td>' + dados.QuantEstoque + '</td>' +
         '<td>' + (dados.Ativo ? 'SIM' : 'NÃO') + '</td>';
     return str;
-
 }
 
 function get_dados_inclusao() {
@@ -33,9 +33,9 @@ function get_dados_inclusao() {
         Id: 0,
         Codigo: '',
         Nome: '',
-        PrecoCusto: 0,
-        PrecoVenda: 0,
-        QuantEstoque: 0,
+        PrecoCusto: '',
+        PrecoVenda: '',
+        QuantEstoque: '',
         UnidadeMedida: '',
         IdGrupo: 0,
         IdSubGrupo: 0,
@@ -74,5 +74,6 @@ $(document)
     .ready(function () {
         $('#txt_preco_custo,#txt_preco_venda').mask('#.##0,00', { reverse: true });
         $('#txt_quant_estoque').mask('00000');
-        
+        //<globalization culture="pt-BR" uiCulture="pt-BR" /> // global para converter 
     });
+  
