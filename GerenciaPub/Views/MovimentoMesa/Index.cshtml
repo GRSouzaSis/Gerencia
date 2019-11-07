@@ -34,7 +34,7 @@
                     <div class="col-md-2">
                         <div>
                             <a id="btn_incluir" class="btn btn-success" role="button">
-                                <i class="glyphicon glyphicon-plus"></i>Abrir mesa
+                                <i class="glyphicon glyphicon-plus"></i>Incluir mesa
                             </a>
                         </div>
                     </div>
@@ -55,24 +55,27 @@
 
         @foreach (var item in Model)
         {
-            <div data-id="@item.MesaId" onclick="res()" class="mesas">
+            <div data-id="@item.MesaId" class="mesas">
                 <div class="conteudo_mesa">
                     <p>@item.MesaNome</p>
                 </div>
             </div>
         }
+        <div class="cor_fundo"></div>
+        <div class="eventos" role="group" aria-label="Exemplo básico">
+            <button type="button" class="btn btn-primary">Abrir mesa</button><br /><br />
+            <button type="button" class="btn btn-success">Pedidos</button><br /><br />
+            <button type="button" class="btn btn-warning">Trocar mesa</button><br /><br />
+            <button type="button" class="btn btn-danger">Fechar mesa</button><br /><br />
+
+        </div>
     </div>
 </div>
 
 
 
 
-<div id="eventos" class="btn-group invisivel" role="group" aria-label="Exemplo básico">
-    <button type="button" class="btn btn-primary">Abrir mesa</button>
-    <button type="button" class="btn btn-success">Pedidos</button>
-    <button type="button" class="btn btn-warning">Trocar mesa</button>
-    <button type="button" class="btn btn-danger">Fechar mesa</button>
-</div>
+
 
 
 

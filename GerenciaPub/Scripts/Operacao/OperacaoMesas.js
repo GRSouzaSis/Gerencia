@@ -116,7 +116,6 @@ function get_dados_form() {
 }
 
 function res() {
-   
     bootbox.dialog({
         title: 'Funções ',
         message: getDataHora()
@@ -129,9 +128,8 @@ function addDiv() {
     var divAtual = cloneform = $('#controle_mesas').html();
     var divNova = document.createElement("div");
     divNova.setAttribute("data-id", $('#txt_mesa').val());
-    divNova.setAttribute("class", "mesas");
-    divNova.setAttribute("onclick", "res()");
-    divNova.style.backgroundColor = 'red';
+    divNova.setAttribute("class", "mesas");   
+    divNova.style.backgroundColor = 'green';
     var conteudoNovo = document.createTextNode($('#txt_mesa').val());
     divNova.appendChild(conteudoNovo); //adiciona o nó de texto à nova div criada
     $('#controle_mesas').append(divNova);// adiciona o novo elemento criado e seu conteúdo ao DOM
@@ -154,6 +152,28 @@ function get_dados_form() {
         MesaNome: $('#txt_mesa').val()
     };
 }
+
+$(document).ready(function () {
+    $(".eventos").hide();
+    $(".mesas").click(function () {
+        $('.cor_fundo, .eventos').animate({ 'opacity': '.60' }, 500, 'linear');
+        $('.eventos').animate({ 'opacity': '1.00' }, 500, 'linear');
+        $('.cor_fundo, .eventos').css('display', 'block');       
+    });
+    $(".cor_fundo").click(function () {
+        $('.cor_fundo, .eventos').animate({ 'opacity': '0' }, 500, function () {
+            $('.cor_fundo, .eventos').css('display', 'none');
+        });
+    });
+});
+
+
+/*
+$(".eventos").hide();
+$(".mesas").click(function () {
+    $(this).toggleClass("active").nextAll(this.after).slideToggle("slow");
+    return false;
+});
 
 
 /*
