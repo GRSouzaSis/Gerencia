@@ -13,7 +13,7 @@
 
 <div class="container" id="principal">
     <div id="controle_sistema">
-        <div id="config_mesas">
+        <section id="config_mesas">
             <div class="row">
                 <h3>@ViewBag.Title</h3>
             </div>
@@ -23,7 +23,7 @@
                 @Html.AntiForgeryToken()
                 <div class="row col-md-12">
                     <section>
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <div class="form-check">
                                 @Html.TextBox("txt_mesa", null, new { @class = "form-control", placeholder = "Numero Mesa/Comanda" })
                             </div>
@@ -38,7 +38,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-offset-3">
                         <div class="form-check">
                             @Html.TextBox("txt_filtro", null, new { @class = "form-control", placeholder = "Filtrar Mesas" })
                         </div>
@@ -46,30 +46,32 @@
 
                 </div>
             </fieldset>
-        </div>
+        </section>
     </div>
     <br />
 
 
-    <div id="controle_mesas" class="container">
+    <section id="controle_mesas" class="container">
 
         @foreach (var item in Model)
         {
             <div data-id="@item.MesaId" class="mesas">
                 <div class="conteudo_mesa">
                     <p>@item.MesaNome</p>
+                    <p class="conteudo">@item.MoviDataEntrada</p>
+                    <p class="conteudo">@item.MoviNroPessoa</p>
                 </div>
             </div>
         }
         <div class="cor_fundo"></div>
         <div class="eventos" role="group" aria-label="Exemplo básico">
-            <button type="button" class="btn btn-primary">Abrir mesa</button><br /><br />
-            <button type="button" class="btn btn-success">Pedidos</button><br /><br />
-            <button type="button" class="btn btn-warning">Trocar mesa</button><br /><br />
-            <button type="button" class="btn btn-danger">Fechar mesa</button><br /><br />
+            <button id="abrir" type="button" class="btn btn-primary">Abrir mesa</button><br /><br />
+            <button id="pedidos" type="button" class="btn btn-success">Pedidos</button><br /><br />
+            <button id="trocar" type="button" class="btn btn-warning">Trocar mesa</button><br /><br />
+            <button id="fechar" type="button" class="btn btn-danger">Fechar mesa</button><br /><br />
 
         </div>
-    </div>
+    </section>
 </div>
 
 
@@ -82,6 +84,7 @@
 @section Scripts{
     <script>
         var url_confirmar = '@Url.Action("SalvarMesa", "MovimentoMesa")';
+        //var url_abrir = '@Url.Action("SalvarMoviMesa", "MovimentoMesa")';
         var url_filtro = '@Url.Action("MesaPagina", "MovimentoMesa")';
     </script>
     <script src="~/Scripts/Operacao/OperacaoMesas.js"></script>

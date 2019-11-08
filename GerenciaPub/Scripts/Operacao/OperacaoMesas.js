@@ -16,6 +16,20 @@ function formatar_mensagem_aviso(mensagens) {
 $(document).ready(function () {
     $('#txt_mesa').focus();
     $('#txt_mesa').mask("000000");
+    $('.conteudo').hide();
+    $(".eventos").hide();
+
+        
+    $(".mesas").click(function () {
+        $('.cor_fundo, .eventos').animate({ 'opacity': '.60' }, 0, 'linear');
+        $('.eventos').animate({ 'opacity': '1.00' }, 0, 'linear');
+        $('.cor_fundo, .eventos').css('display', 'block');
+    });
+    $(".cor_fundo").click(function () {
+        $('.cor_fundo, .eventos').animate({ 'opacity': '0' }, 0, function () {
+            $('.cor_fundo, .eventos').css('display', 'none');
+        });
+    });
 })
     .on('click', '#btn_incluir', function () {
         var btn = $(this),
@@ -77,7 +91,19 @@ $(document).ready(function () {
                 }
             }
         });
+    })
+    .on('click', '.mesas', function () { // click na div mesas
+
+        var mesaid;
+        mesaid =  $(this).data('id'); // getId 
+        $("#abrir").click(function () {// botão abrir
+            $('.cor_fundo, .eventos').animate({ 'opacity': '0' }, 0, function () { //animação de uma div com botoes
+                $('.cor_fundo, .eventos').css('display', 'none');
+            });
+           alert(mesaid);//alert pra testar
+        });
     });
+
 
 document.addEventListener('keydown', function (e) {
     if (e.key == "Enter") {
@@ -128,7 +154,7 @@ function addDiv() {
     var divAtual = cloneform = $('#controle_mesas').html();
     var divNova = document.createElement("div");
     divNova.setAttribute("data-id", $('#txt_mesa').val());
-    divNova.setAttribute("class", "mesas");   
+    divNova.setAttribute("class", "mesas");
     divNova.style.backgroundColor = 'green';
     var conteudoNovo = document.createTextNode($('#txt_mesa').val());
     divNova.appendChild(conteudoNovo); //adiciona o nó de texto à nova div criada
@@ -152,23 +178,25 @@ function get_dados_form() {
         MesaNome: $('#txt_mesa').val()
     };
 }
-
+/*
 $(document).ready(function () {
     $(".eventos").hide();
     $(".mesas").click(function () {
         $('.cor_fundo, .eventos').animate({ 'opacity': '.60' }, 500, 'linear');
         $('.eventos').animate({ 'opacity': '1.00' }, 500, 'linear');
-        $('.cor_fundo, .eventos').css('display', 'block');       
+        $('.cor_fundo, .eventos').css('display', 'block');
     });
     $(".cor_fundo").click(function () {
         $('.cor_fundo, .eventos').animate({ 'opacity': '0' }, 500, function () {
             $('.cor_fundo, .eventos').css('display', 'none');
         });
     });
+
 });
 
 
-/*
+
+
 $(".eventos").hide();
 $(".mesas").click(function () {
     $(this).toggleClass("active").nextAll(this.after).slideToggle("slow");

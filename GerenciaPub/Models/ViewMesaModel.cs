@@ -183,6 +183,48 @@ namespace GerenciaPub.Models
 
             return ret;
         }
+        public int SalvarMoviMesa()
+        {
+            var ret = 0;
+
+            var model = RecuperarPeloId(this.MesaId);
+
+            using (var conexao = new SqlConnection())
+            {
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
+                conexao.Open();
+                using (var comando = new SqlCommand())
+                {
+                    comando.Connection = conexao;
+
+
+                    if (model == null)
+                    {
+                        comando.CommandText = "insert into movimesa (mmo_dataentrada, mmo_nropessoa) values (@dtentrada, @nropessoa); select convert(int, scope_identity())";
+
+                        comando.Parameters.Add("@dtentrada", SqlDbType.DateTime).Value = this.MoviDataEntrada;
+                        comando.Parameters.Add("@nropessoa", SqlDbType.Int).Value = (this.MoviNroPessoa);
+
+                        ret = (int)comando.ExecuteScalar();
+                    }
+                    else
+                    {
+                        comando.CommandText = "update movimesa set mmo_dataentrada=@dtentrada, mmo_nropessoa=@nropessoa where mes_id = @id";
+
+                        comando.Parameters.Add("@dtentrada", SqlDbType.DateTime).Value = this.MoviDataEntrada;
+                        comando.Parameters.Add("@nropessoa", SqlDbType.Int).Value = (this.MoviNroPessoa);
+                        comando.Parameters.Add("@id", SqlDbType.Int).Value = this.MesaId;
+
+                        if (comando.ExecuteNonQuery() > 0)
+                        {
+                            ret = this.MesaId;
+                        }
+                    }
+                }
+            }
+
+            return ret;
+        }
         /*
                 public int Salvar(string mesa)
                 {
